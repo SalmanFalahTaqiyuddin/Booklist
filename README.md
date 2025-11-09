@@ -40,9 +40,9 @@ Pastikan Anda telah menginstal komponen berikut di sistem Anda:
 ### Langkah-langkah Instalasi
 
 1.  **Clone Repositori:**
-    Buka terminal dan *clone* repositori proyek ini. Ganti `https://github.com/SalmanFalahTaqiyuddin/Booklist/blob/main/README.md` dengan URL repositori Anda yang sebenarnya.
+    Buka terminal dan *clone* repositori proyek ini. Ganti `https://github.com/SalmanFalahTaqiyuddin/Booklist` dengan URL repositori Anda yang sebenarnya.
     ```bash
-    git clone https://github.com/SalmanFalahTaqiyuddin/Booklist/blob/main/README.md
+    git clone https://github.com/SalmanFalahTaqiyuddin/Booklist
     cd booklist-app
     ```
 
