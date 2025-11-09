@@ -11,7 +11,7 @@ Berikut adalah fitur-fitur utama yang ditawarkan oleh aplikasi Booklist:
 
 * **CRUD Buku:** Fungsionalitas inti untuk **menambah**, **melihat**, **mengubah**, dan **menghapus** entri buku dari daftar bacaan Anda.
 * **Rating Buku:** Memberikan **penilaian** (rating) pada buku yang telah dibaca untuk melacak favorit Anda.
-* **Profil:**Bagian untuk menampilkan **informasi dasar pengguna** (seperti nama, email, dan foto profil).
+* **Profil:** Bagian untuk menampilkan **informasi dasar pengguna** (seperti nama, email, dan foto profil).
 * **News (Berita):** Menyediakan pembaruan atau informasi terkait dunia buku dan literatur (misalnya, berita rilis buku baru atau event).
 
 ---
