@@ -145,7 +145,13 @@ class _EditProfileViewState extends State<EditProfileView> {
             ElevatedButton(
               onPressed: _saveProfile,
               style: ElevatedButton.styleFrom(
+<<<<<<< HEAD
                 backgroundColor: const Color(0xffFFA500),
+=======
+                backgroundColor: const Color(
+                  0xffFFA500,
+                ),
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),

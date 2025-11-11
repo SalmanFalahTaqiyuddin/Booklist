@@ -68,3 +68,12 @@ Proyek **Booklist** ini merupakan **proyek pribadi** yang dikerjakan sendiri.
 * **Status Kontribusi:** Saat ini, kontribusi eksternal tidak diterima.
 
 ---
+
+## 📸 Tampilan Aplikasi (Screenshots)
+
+Intip sekilas antarmuka dan pengalaman pengguna aplikasi **Booklist**. Lihat bagaimana Anda dapat mengelola daftar buku dan memberikan *rating* dengan mudah.
+
+
+
+
+---

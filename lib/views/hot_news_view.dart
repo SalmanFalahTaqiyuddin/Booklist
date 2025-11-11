@@ -72,7 +72,13 @@ class NewsDetailPage extends StatelessWidget {
           news.title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+<<<<<<< HEAD
           style: const TextStyle(fontWeight: FontWeight.bold),
+=======
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
         ),
         backgroundColor: const Color(0xff189B56),
         foregroundColor: Colors.white,
@@ -87,7 +93,13 @@ class NewsDetailPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ClipRRect(
+<<<<<<< HEAD
                 borderRadius: BorderRadius.circular(12),
+=======
+                borderRadius: BorderRadius.circular(
+                  12,
+                ),
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
                 child: Image.network(
                   news.imageUrl,
                   width: double.infinity,
@@ -124,7 +136,14 @@ class NewsDetailPage extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
+<<<<<<< HEAD
               const Divider(height: 30, color: Colors.white54),
+=======
+              const Divider(
+                height: 30,
+                color: Colors.white54,
+              ),
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
 
               Text(
                 news.content,
@@ -374,7 +393,16 @@ class _HotNewsViewState extends State<HotNewsView> {
             ),
           ),
         ),
+<<<<<<< HEAD
         const Divider(indent: 16, endIndent: 16, height: 1, color: Colors.grey),
+=======
+        const Divider(
+          indent: 16,
+          endIndent: 16,
+          height: 1,
+          color: Colors.grey,
+        ),
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
       ],
     );
   }

@@ -163,10 +163,22 @@ class _ProfileViewState extends State<ProfileView> {
                       size: 20,
                     ),
                     enabledBorder: const UnderlineInputBorder(
+<<<<<<< HEAD
                       borderSide: BorderSide(color: Colors.white38),
                     ),
                     focusedBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 2.0),
+=======
+                      borderSide: BorderSide(
+                        color: Colors.white38,
+                      ), 
+                    ),
+                    focusedBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 2.0,
+                      ), 
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
                     ),
                     contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
                   ),
@@ -192,7 +204,14 @@ class _ProfileViewState extends State<ProfileView> {
                   ],
                 ),
           if (!_isEditing)
+<<<<<<< HEAD
             const Divider(color: Color.fromARGB(59, 255, 255, 255), height: 16),
+=======
+            const Divider(
+              color: Color.fromARGB(59, 255, 255, 255),
+              height: 16,
+            ), 
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
         ],
       ),
     );
@@ -247,7 +266,11 @@ class _ProfileViewState extends State<ProfileView> {
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
                         color: const Color(0xffFFA500),
+<<<<<<< HEAD
                         borderRadius: BorderRadius.circular(20),
+=======
+                        borderRadius: BorderRadius.circular(20), 
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
                       ),
                       child: const Icon(
                         Icons.camera_alt,
@@ -338,7 +361,11 @@ class _ProfileViewState extends State<ProfileView> {
             Container(
               decoration: BoxDecoration(
                 color: Colors.black12,
+<<<<<<< HEAD
                 borderRadius: BorderRadius.circular(10),
+=======
+                borderRadius: BorderRadius.circular(10), 
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
                 border: Border.all(color: Colors.white38),
               ),
               child: Column(

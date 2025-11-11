@@ -48,12 +48,27 @@ class _MainPageState extends State<MainPageView> {
 
   Widget _buildDrawer() {
     return Drawer(
+<<<<<<< HEAD
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+=======
+      backgroundColor: const Color.fromARGB(
+        255,
+        255,
+        255,
+        255,
+      ), 
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           const DrawerHeader(
+<<<<<<< HEAD
             decoration: BoxDecoration(color: Color(0xff189B56)),
+=======
+            decoration: BoxDecoration(
+              color: Color(0xff189B56),
+            ), 
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -78,13 +93,25 @@ class _MainPageState extends State<MainPageView> {
             return ListTile(
               leading: Icon(
                 item['icon'],
+<<<<<<< HEAD
                 color: isSelected ? const Color(0xff189B56) : Colors.grey[700],
+=======
+                color: isSelected
+                    ? const Color(0xff189B56)
+                    : Colors.grey[700], 
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
               ),
               title: Text(
                 item['title'],
                 style: TextStyle(
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+<<<<<<< HEAD
                   color: isSelected ? const Color(0xff189B56) : Colors.black,
+=======
+                  color: isSelected
+                      ? const Color(0xff189B56)
+                      : Colors.black, 
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
                 ),
               ),
               onTap: () {
@@ -101,9 +128,15 @@ class _MainPageState extends State<MainPageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
       backgroundColor: const Color(0xff189B56),
       appBar: AppBar(
         backgroundColor: const Color(0xff189B56),
+=======
+      backgroundColor: const Color(0xff189B56), 
+      appBar: AppBar(
+        backgroundColor: const Color(0xff189B56), 
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
         elevation: 0,
         scrolledUnderElevation: 0.0,
         foregroundColor: Colors.white,
@@ -119,7 +152,13 @@ class _MainPageState extends State<MainPageView> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
+<<<<<<< HEAD
                   color: const Color(0xffFFA500),
+=======
+                  color: const Color(
+                    0xffFFA500,
+                  ), 
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.menu, color: Colors.white, size: 24),
@@ -131,7 +170,11 @@ class _MainPageState extends State<MainPageView> {
           _drawerItems[_selectedIndex]['title']!,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
+<<<<<<< HEAD
             color: Colors.white,
+=======
+            color: Colors.white, 
+>>>>>>> 527f104cae95da18fd3adb881bba17c2f940a6bd
             fontSize: 28,
           ),
         ),
