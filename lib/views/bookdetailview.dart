@@ -1,12 +1,16 @@
 import 'package:data/models/book.dart';
 import 'package:flutter/material.dart';
 
-class BookDetailView extends StatelessWidget {
-  final BookModel book;
+const _primaryColor = Color(0xFF1A2D25);
+const _backgroundColor = Colors.white;
 
-  const BookDetailView({super.key, required this.book});
+class _StarRatingDisplay extends StatelessWidget {
+  final double? rating;
 
-  Widget _buildStarRatingDisplay(double? rating) {
+  const _StarRatingDisplay({required this.rating});
+
+  @override
+  Widget build(BuildContext context) {
     final nonNullRating = rating ?? 0.0;
     final fullStars = nonNullRating.floor();
     final hasHalfStar = (nonNullRating - fullStars) >= 0.5;
@@ -27,7 +31,7 @@ class BookDetailView extends StatelessWidget {
         ...stars,
         const SizedBox(width: 10),
         Text(
-          book.rating?.toStringAsFixed(1) ?? 'N/A',
+          rating?.toStringAsFixed(1) ?? 'N/A',
           style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -37,14 +41,47 @@ class BookDetailView extends StatelessWidget {
       ],
     );
   }
+}
+
+class _BookCoverImage extends StatelessWidget {
+  final String imageUrl;
+
+  const _BookCoverImage({required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
-    const primaryColor = Color(0xFF1A2D25);
-    const backgroundColor = Color.fromARGB(255, 255, 255, 255);
+    return Center(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15.0),
+        child: Image.network(
+          imageUrl,
+          height: 300,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) => Container(
+            height: 300,
+            width: 200,
+            color: Colors.grey,
+            child: const Icon(
+              Icons.image_not_supported,
+              color: Colors.white,
+              size: 50,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
+class BookDetailView extends StatelessWidget {
+  final BookModel book;
+
+  const BookDetailView({super.key, required this.book});
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: _backgroundColor,
       appBar: AppBar(
         title: Text(
           book.title,
@@ -52,8 +89,8 @@ class BookDetailView extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: backgroundColor,
-        foregroundColor: primaryColor,
+        backgroundColor: _backgroundColor,
+        foregroundColor: _primaryColor,
         elevation: 0.0,
         scrolledUnderElevation: 0.0,
       ),
@@ -62,45 +99,26 @@ class BookDetailView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15.0),
-                child: Image.network(
-                  book.imageUrl,
-                  height: 300,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => Container(
-                    height: 300,
-                    width: 200,
-                    color: Colors.grey,
-                    child: const Icon(
-                      Icons.image_not_supported,
-                      color: Colors.white,
-                      size: 50,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            _BookCoverImage(imageUrl: book.imageUrl),
             const SizedBox(height: 20),
-            Center(child: _buildStarRatingDisplay(book.rating)),
+            _StarRatingDisplay(rating: book.rating),
             const SizedBox(height: 30),
             Text(
               book.title,
               style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: primaryColor,
+                color: _primaryColor,
               ),
             ),
-            const Divider(color: primaryColor),
+            const Divider(color: _primaryColor),
             const SizedBox(height: 10),
             const Text(
               'Deskripsi',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: primaryColor,
+                color: _primaryColor,
               ),
             ),
             const SizedBox(height: 8),
@@ -108,7 +126,7 @@ class BookDetailView extends StatelessWidget {
               book.description ?? 'Deskripsi tidak tersedia.',
               style: const TextStyle(
                 fontSize: 16,
-                color: primaryColor,
+                color: _primaryColor,
                 height: 1.5,
               ),
             ),
