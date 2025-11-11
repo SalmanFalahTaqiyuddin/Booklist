@@ -10,7 +10,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final _audioPlayer = AudioPlayer();
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   @override
   void initState() {
@@ -19,19 +19,18 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _playAudioAndNavigate() async {
-    const Duration splashDuration = Duration(seconds: 3);
-
     try {
       await _audioPlayer.play(AssetSource('splash.wav'));
+      print('Audio: Berhasil memuat dan memutar splash.wav');
     } catch (e) {
-      print(
-        '❌ ERROR MEMUTAR AUDIO: Gagal memuat/memutar splash.wav. Error: $e',
-      );
+      print('ERROR: Gagal memuat/memutar audio. Error: $e');
     }
 
-    await Future.delayed(splashDuration);
+    await Future.delayed(const Duration(seconds: 3));
+
     if (mounted) {
-      Navigator.pushReplacementNamed(context, '/book');
+      Navigator.of(context).pushReplacementNamed('/book');
+      print('Navigasi: Berhasil pindah ke rute /book');
     }
   }
 
@@ -43,14 +42,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xff189B56),
+    return Scaffold(
+      backgroundColor: const Color(0xff189B56),
       body: Center(
-        child: Image(
-          image: AssetImage('assets/logo.png'),
-          width: 200,
-          height: 200,
-        ),
+        child: Image.asset('assets/logo.png', width: 200, height: 200),
       ),
     );
   }
