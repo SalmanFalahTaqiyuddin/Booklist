@@ -68,21 +68,30 @@ class NewsDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(news.title, maxLines: 1, overflow: TextOverflow.ellipsis),
-        backgroundColor: const Color(0xff189B56),
+        title: Text(
+          news.title,
+          maxLines: 1, //biar cuma tampil 1 baris
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ), //judul di detail berita yg bgian app bar
+        ),
+        backgroundColor: const Color(0xff189B56), //gnti wrna app bar yg detail
         foregroundColor: Colors.white,
-        elevation: 0.0,
-        scrolledUnderElevation: 0.0,
+        elevation: 0.0, //hilangkan shadow app bar
+        scrolledUnderElevation: 0.0, //hilangkan shadow app bar ketika discroll
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: const Color(0xff189B56),
+          color: const Color(0xff189B56), //warna ketika berita dipencet
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(
+                  12,
+                ), //ini radius berita didalemm
                 child: Image.network(
                   news.imageUrl,
                   width: double.infinity,
@@ -119,7 +128,11 @@ class NewsDetailPage extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
-              const Divider(height: 30, color: Colors.white54),
+              const Divider(
+                height: 30,
+                color: Colors.white54,
+              ), //garis di detail
+
               Text(
                 news.content,
                 style: const TextStyle(
@@ -220,7 +233,7 @@ class _HotNewsViewState extends State<HotNewsView> {
             ],
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16), //radius berita carousel
             child: Stack(
               fit: StackFit.expand,
               children: [
@@ -287,12 +300,14 @@ class _HotNewsViewState extends State<HotNewsView> {
       children: mockNews.map((news) {
         int index = mockNews.indexOf(news);
         return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 100),
           margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 10.0),
           height: 8.0,
           width: 8.0,
           decoration: BoxDecoration(
-            color: _currentPage == index ? Colors.white : Colors.white54,
+            color: _currentPage == index
+                ? const Color.fromARGB(255, 255, 255, 255) //warna pas discroll
+                : Colors.white54, //warna pas bulet bulet gk discroll
             borderRadius: BorderRadius.circular(4),
           ),
         );
@@ -314,7 +329,7 @@ class _HotNewsViewState extends State<HotNewsView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10), //radius berita list
                   child: Image.network(
                     news.imageUrl,
                     width: 90,
@@ -366,7 +381,12 @@ class _HotNewsViewState extends State<HotNewsView> {
             ),
           ),
         ),
-        const Divider(indent: 16, endIndent: 16, height: 1, color: Colors.grey),
+        const Divider(
+          indent: 16,
+          endIndent: 16,
+          height: 1,
+          color: Colors.grey, //garis
+        ),
       ],
     );
   }
@@ -392,7 +412,7 @@ class _HotNewsViewState extends State<HotNewsView> {
             _buildPageIndicator(),
             Container(
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: Colors.white, //buat warna cardny
                 borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
               ),
               child: ClipRRect(

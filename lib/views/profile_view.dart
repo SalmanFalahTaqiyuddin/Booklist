@@ -1,5 +1,3 @@
-// lib/views/profile_view.dart
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,6 +26,8 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
+  final String _defaultAssetImagePath = 'assets/background.png';
+
   final List<ProfileItem> _profileData = [
     ProfileItem(
       label: 'Nama Lengkap',
@@ -56,11 +56,14 @@ class _ProfileViewState extends State<ProfileView> {
   bool _isEditing = false;
   final ImagePicker _picker = ImagePicker();
   File? _currentProfileImageFile;
-
   final AudioPlayer _audioPlayer = AudioPlayer();
 
   Future<void> _playSound(String assetFileName) async {
-    await _audioPlayer.play(AssetSource(assetFileName));
+    try {
+      await _audioPlayer.play(AssetSource(assetFileName));
+    } catch (e) {
+      print("Gagal memutar audio $assetFileName: $e");
+    }
   }
 
   String? _getCurrentImagePath() {
@@ -160,10 +163,15 @@ class _ProfileViewState extends State<ProfileView> {
                       size: 20,
                     ),
                     enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white38),
+                      borderSide: BorderSide(
+                        color: Colors.white38,
+                      ), //garis pas dedit
                     ),
                     focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 2.0),
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 2.0,
+                      ), //garis pas mau diketik
                     ),
                     contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
                   ),
@@ -188,7 +196,11 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ],
                 ),
-          if (!_isEditing) const Divider(color: Colors.white24, height: 16),
+          if (!_isEditing)
+            const Divider(
+              color: Color.fromARGB(59, 255, 255, 255),
+              height: 16,
+            ), //garis pas gk di edit
         ],
       ),
     );
@@ -231,10 +243,8 @@ class _ProfileViewState extends State<ProfileView> {
                   backgroundColor: const Color.fromARGB(137, 255, 255, 255),
                   backgroundImage: imageFileToDisplay != null
                       ? FileImage(imageFileToDisplay) as ImageProvider
-                      : null,
-                  child: imageFileToDisplay == null
-                      ? const Icon(Icons.person, size: 80, color: Colors.white)
-                      : null,
+                      : AssetImage(_defaultAssetImagePath) as ImageProvider,
+                  child: null,
                 ),
                 Positioned(
                   bottom: 0,
@@ -245,7 +255,7 @@ class _ProfileViewState extends State<ProfileView> {
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
                         color: const Color(0xffFFA500),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20), //garis kamera
                       ),
                       child: const Icon(
                         Icons.camera_alt,
@@ -292,6 +302,9 @@ class _ProfileViewState extends State<ProfileView> {
                         horizontal: 20,
                         vertical: 10,
                       ),
+                      // shape: RoundedRectangleBorder(
+                      //   borderRadius: BorderRadius.zero,
+                      // ),
                     ),
                   ),
                 if (_isEditing) ...[
@@ -336,7 +349,7 @@ class _ProfileViewState extends State<ProfileView> {
             Container(
               decoration: BoxDecoration(
                 color: Colors.black12,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10), //garis form
                 border: Border.all(color: Colors.white38),
               ),
               child: Column(

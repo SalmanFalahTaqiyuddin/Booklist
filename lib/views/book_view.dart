@@ -5,22 +5,60 @@ import 'package:data/widgets/modal_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-class _InteractiveStarRating extends StatefulWidget {
+class InteractiveStarRating extends StatefulWidget {
   final TextEditingController controller;
+  final VoidCallback? onStarTap;
 
-  const _InteractiveStarRating({required this.controller});
+  const InteractiveStarRating({
+    required this.controller,
+    this.onStarTap,
+    super.key,
+  });
 
   @override
-  State<_InteractiveStarRating> createState() => __InteractiveStarRatingState();
+  State<InteractiveStarRating> createState() => _InteractiveStarRatingState();
 }
 
-class __InteractiveStarRatingState extends State<_InteractiveStarRating> {
+class _InteractiveStarRatingState extends State<InteractiveStarRating> {
   double _currentRating = 0.0;
+
+  static const double _starSize = 35.0;
+  static const double _starPaddingRight = 4.0;
 
   @override
   void initState() {
     super.initState();
-    _currentRating = double.tryParse(widget.controller.text) ?? 0.0;
+    _currentRating = _clampRating(
+      double.tryParse(widget.controller.text) ?? 0.0,
+    );
+    widget.controller.addListener(_updateRatingFromController);
+  }
+
+  double _clampRating(double value) {
+    double roundedValue = (value * 2).roundToDouble() / 2.0;
+    return roundedValue.clamp(0.0, 5.0);
+  }
+
+  void _updateRatingFromController() {
+    final newText = widget.controller.text;
+    final newRating = double.tryParse(newText) ?? 0.0;
+    final clampedRating = _clampRating(newRating);
+
+    if (_currentRating != clampedRating) {
+      Future.delayed(Duration.zero, () {
+        if (mounted) {
+          setState(() {
+            _currentRating = clampedRating;
+          });
+        }
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(_updateRatingFromController);
+    super.dispose();
   }
 
   @override
@@ -34,42 +72,69 @@ class __InteractiveStarRatingState extends State<_InteractiveStarRating> {
         ),
         const SizedBox(height: 8),
         Row(
+          mainAxisSize: MainAxisSize.min,
           children: List.generate(5, (index) {
-            double starPosition = (index + 1).toDouble();
+            double starValue = (index + 1).toDouble();
 
-            bool isFilled = starPosition <= _currentRating;
+            IconData icon;
+            if (_currentRating >= starValue) {
+              icon = Icons.star;
+            } else if (_currentRating >= starValue - 0.5) {
+              icon = Icons.star_half;
+            } else {
+              icon = Icons.star_border;
+            }
 
             return GestureDetector(
-              onTap: () {
+              onTapDown: (details) {
+                widget.onStarTap?.call();
+
+                final localDx = details.localPosition.dx;
+                final isHalfStarClick = localDx < (_starSize / 2);
+
+                double newRating;
+                if (isHalfStarClick) {
+                  newRating = index + 0.5;
+                } else {
+                  newRating = index + 1.0;
+                }
+
+                newRating = _clampRating(newRating);
+
                 setState(() {
-                  _currentRating = starPosition;
+                  _currentRating = newRating;
                 });
-                widget.controller.text = starPosition.toString();
+
+                widget.controller.text = newRating.toStringAsFixed(1);
               },
               child: Padding(
-                padding: const EdgeInsets.only(right: 4.0),
-                child: Icon(
-                  isFilled ? Icons.star : Icons.star_border,
-                  color: Colors.amber,
-                  size: 35,
+                padding: const EdgeInsets.only(right: _starPaddingRight),
+                child: SizedBox(
+                  width: _starSize,
+                  child: Icon(icon, color: Colors.amber, size: _starSize),
                 ),
               ),
             );
           }),
         ),
+        const SizedBox(height: 15),
         TextFormField(
           controller: widget.controller,
-          readOnly: true,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
-            labelText: 'Rating Bintang (klik bintang di atas): $_currentRating',
+            labelText:
+                'Rating Bintang (0.0 - 5.0): ${_currentRating.toStringAsFixed(1)}',
             border: const OutlineInputBorder(),
           ),
+          onChanged: (value) {
+            _updateRatingFromController();
+          },
           validator: (value) {
-            if (value!.isEmpty ||
-                double.tryParse(value) == null ||
-                double.parse(value) < 0 ||
-                double.parse(value) > 5) {
-              return 'Pilih rating (0.0 - 5.0) dengan mengklik bintang.';
+            final double? rating = double.tryParse(value ?? '');
+            if (value!.isEmpty) {
+              return 'Rating harus diisi.';
+            } else if (rating == null || rating < 0.0 || rating > 5.0) {
+              return 'Masukkan angka rating antara 0.0 sampai 5.0.';
             }
             return null;
           },
@@ -105,7 +170,7 @@ class _BookViewState extends State<BookView> {
     await _audioPlayer.play(AssetSource(fileName));
   }
 
-  getBooks() {
+  void getBooks() {
     setState(() {
       books = bookController.booksFinished;
     });
@@ -121,12 +186,17 @@ class _BookViewState extends State<BookView> {
   @override
   void dispose() {
     _audioPlayer.dispose();
+    titleController.dispose();
+    imageController.dispose();
+    ratingController.dispose();
+    descriptionController.dispose();
     super.dispose();
   }
 
   Widget _buildStarRating(double? rating) {
     int fullStars = rating?.floor() ?? 0;
-    bool hasHalfStar = (rating! - fullStars) >= 0.5;
+    double clampedRating = (rating ?? 0.0).clamp(0.0, 5.0);
+    bool hasHalfStar = (clampedRating - fullStars) >= 0.5;
 
     List<Widget> stars = [];
     for (int i = 0; i < 5; i++) {
@@ -145,7 +215,7 @@ class _BookViewState extends State<BookView> {
         ...stars,
         const SizedBox(width: 8),
         Text(
-          '(${rating?.toStringAsFixed(1) ?? '0.0'})',
+          '(${clampedRating.toStringAsFixed(1)})',
           style: const TextStyle(
             color: Colors.amber,
             fontWeight: FontWeight.bold,
@@ -238,7 +308,7 @@ class _BookViewState extends State<BookView> {
                           titleController.text = books[index].title;
                           imageController.text = books[index].imageUrl;
                           ratingController.text =
-                              books[index].rating?.toString() ?? '0.0';
+                              books[index].rating?.toStringAsFixed(1) ?? '0.0';
                           descriptionController.text =
                               books[index].description ?? '';
 
@@ -284,7 +354,10 @@ class _BookViewState extends State<BookView> {
               },
             ),
             const SizedBox(height: 15),
-            _InteractiveStarRating(controller: ratingController),
+            InteractiveStarRating(
+              controller: ratingController,
+              onStarTap: () => _playSound('click.wav'),
+            ),
             const SizedBox(height: 15),
             TextFormField(
               controller: imageController,
@@ -312,14 +385,20 @@ class _BookViewState extends State<BookView> {
             ElevatedButton(
               onPressed: () {
                 if (formKey.currentState!.validate()) {
+                  final double? newRating = double.tryParse(
+                    ratingController.text,
+                  );
+
+                  if (newRating == null || newRating < 0.0 || newRating > 5.0) {
+                    return;
+                  }
+
                   _playSound('succes.wav');
                   if (index != null) {
                     books[index].id = bookId ?? 0;
                     books[index].title = titleController.text;
                     books[index].imageUrl = imageController.text;
-                    books[index].rating = double.tryParse(
-                      ratingController.text,
-                    );
+                    books[index].rating = newRating;
                     books[index].description = descriptionController.text;
                     getBooks();
                     Navigator.pop(context);
@@ -330,7 +409,7 @@ class _BookViewState extends State<BookView> {
                         id: id,
                         title: titleController.text,
                         imageUrl: imageController.text,
-                        rating: double.tryParse(ratingController.text),
+                        rating: newRating,
                         description: descriptionController.text,
                       ),
                     );
@@ -360,6 +439,13 @@ class _BookViewState extends State<BookView> {
       alignment: Alignment.topRight,
       margin: const EdgeInsets.only(bottom: 30),
       decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
         color: const Color(0xFFE0F3EA),
         borderRadius: BorderRadius.circular(15),
         image: const DecorationImage(
