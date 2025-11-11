@@ -53,14 +53,14 @@ class _MainPageState extends State<MainPageView> {
         255,
         255,
         255,
-      ), //background color di dalem drawer
+      ), 
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           const DrawerHeader(
             decoration: BoxDecoration(
               color: Color(0xff189B56),
-            ), //warna header drawer
+            ), 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -87,7 +87,7 @@ class _MainPageState extends State<MainPageView> {
                 item['icon'],
                 color: isSelected
                     ? const Color(0xff189B56)
-                    : Colors.grey[700], //warna icon icon dlm drawer
+                    : Colors.grey[700], 
               ),
               title: Text(
                 item['title'],
@@ -95,7 +95,7 @@ class _MainPageState extends State<MainPageView> {
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                   color: isSelected
                       ? const Color(0xff189B56)
-                      : Colors.black, //warna title dlm drawer
+                      : Colors.black, 
                 ),
               ),
               onTap: () {
@@ -112,9 +112,9 @@ class _MainPageState extends State<MainPageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff189B56), //warna background profile
+      backgroundColor: const Color(0xff189B56), 
       appBar: AppBar(
-        backgroundColor: const Color(0xff189B56), //warna appbar
+        backgroundColor: const Color(0xff189B56), 
         elevation: 0,
         scrolledUnderElevation: 0.0,
         foregroundColor: Colors.white,
@@ -132,7 +132,7 @@ class _MainPageState extends State<MainPageView> {
                 decoration: BoxDecoration(
                   color: const Color(
                     0xffFFA500,
-                  ), //background color button drawer
+                  ), 
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.menu, color: Colors.white, size: 24),
@@ -144,7 +144,7 @@ class _MainPageState extends State<MainPageView> {
           _drawerItems[_selectedIndex]['title']!,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white, //warna title appabr
+            color: Colors.white, 
             fontSize: 28,
           ),
         ),
