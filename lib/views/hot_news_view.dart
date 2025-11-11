@@ -70,28 +70,24 @@ class NewsDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           news.title,
-          maxLines: 1, //biar cuma tampil 1 baris
+          maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ), //judul di detail berita yg bgian app bar
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: const Color(0xff189B56), //gnti wrna app bar yg detail
+        backgroundColor: const Color(0xff189B56),
         foregroundColor: Colors.white,
-        elevation: 0.0, //hilangkan shadow app bar
-        scrolledUnderElevation: 0.0, //hilangkan shadow app bar ketika discroll
+        elevation: 0.0,
+        scrolledUnderElevation: 0.0,
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: const Color(0xff189B56), //warna ketika berita dipencet
+          color: const Color(0xff189B56),
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.circular(
-                  12,
-                ), //ini radius berita didalemm
+                borderRadius: BorderRadius.circular(12),
                 child: Image.network(
                   news.imageUrl,
                   width: double.infinity,
@@ -128,10 +124,7 @@ class NewsDetailPage extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
-              const Divider(
-                height: 30,
-                color: Colors.white54,
-              ), //garis di detail
+              const Divider(height: 30, color: Colors.white54),
 
               Text(
                 news.content,
@@ -233,7 +226,7 @@ class _HotNewsViewState extends State<HotNewsView> {
             ],
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(16), //radius berita carousel
+            borderRadius: BorderRadius.circular(16),
             child: Stack(
               fit: StackFit.expand,
               children: [
@@ -306,8 +299,8 @@ class _HotNewsViewState extends State<HotNewsView> {
           width: 8.0,
           decoration: BoxDecoration(
             color: _currentPage == index
-                ? const Color.fromARGB(255, 255, 255, 255) //warna pas discroll
-                : Colors.white54, //warna pas bulet bulet gk discroll
+                ? const Color.fromARGB(255, 255, 255, 255)
+                : Colors.white54,
             borderRadius: BorderRadius.circular(4),
           ),
         );
@@ -329,7 +322,7 @@ class _HotNewsViewState extends State<HotNewsView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10), //radius berita list
+                  borderRadius: BorderRadius.circular(10),
                   child: Image.network(
                     news.imageUrl,
                     width: 90,
@@ -381,12 +374,7 @@ class _HotNewsViewState extends State<HotNewsView> {
             ),
           ),
         ),
-        const Divider(
-          indent: 16,
-          endIndent: 16,
-          height: 1,
-          color: Colors.grey, //garis
-        ),
+        const Divider(indent: 16, endIndent: 16, height: 1, color: Colors.grey),
       ],
     );
   }
@@ -412,7 +400,7 @@ class _HotNewsViewState extends State<HotNewsView> {
             _buildPageIndicator(),
             Container(
               decoration: const BoxDecoration(
-                color: Colors.white, //buat warna cardny
+                color: Colors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
               ),
               child: ClipRRect(

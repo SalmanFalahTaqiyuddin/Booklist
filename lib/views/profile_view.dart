@@ -163,15 +163,10 @@ class _ProfileViewState extends State<ProfileView> {
                       size: 20,
                     ),
                     enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white38,
-                      ), //garis pas dedit
+                      borderSide: BorderSide(color: Colors.white38),
                     ),
                     focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                        width: 2.0,
-                      ), //garis pas mau diketik
+                      borderSide: BorderSide(color: Colors.white, width: 2.0),
                     ),
                     contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
                   ),
@@ -197,10 +192,7 @@ class _ProfileViewState extends State<ProfileView> {
                   ],
                 ),
           if (!_isEditing)
-            const Divider(
-              color: Color.fromARGB(59, 255, 255, 255),
-              height: 16,
-            ), //garis pas gk di edit
+            const Divider(color: Color.fromARGB(59, 255, 255, 255), height: 16),
         ],
       ),
     );
@@ -255,7 +247,7 @@ class _ProfileViewState extends State<ProfileView> {
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
                         color: const Color(0xffFFA500),
-                        borderRadius: BorderRadius.circular(20), //garis kamera
+                        borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Icon(
                         Icons.camera_alt,
@@ -302,9 +294,6 @@ class _ProfileViewState extends State<ProfileView> {
                         horizontal: 20,
                         vertical: 10,
                       ),
-                      // shape: RoundedRectangleBorder(
-                      //   borderRadius: BorderRadius.zero,
-                      // ),
                     ),
                   ),
                 if (_isEditing) ...[
@@ -349,7 +338,7 @@ class _ProfileViewState extends State<ProfileView> {
             Container(
               decoration: BoxDecoration(
                 color: Colors.black12,
-                borderRadius: BorderRadius.circular(10), //garis form
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.white38),
               ),
               child: Column(

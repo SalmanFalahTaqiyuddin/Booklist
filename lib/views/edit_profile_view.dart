@@ -8,45 +8,35 @@ class EditProfileView extends StatefulWidget {
 }
 
 class _EditProfileViewState extends State<EditProfileView> {
-  // Controller untuk field Nama
   final TextEditingController _nameController = TextEditingController(
-    text: 'Salman Falah', // Nilai awal
+    text: 'Salman Falah',
   );
 
-  // State untuk menyimpan path gambar yang dipilih (simulasi)
   String? _pickedImagePath;
 
-  // Fungsi simulasi untuk memilih gambar
   Future<void> _pickImage() async {
-    // Simulasi penundaan pengambilan gambar
     await Future.delayed(const Duration(milliseconds: 500));
     setState(() {
       _pickedImagePath = 'Simulated/Path/to/New/Image.jpg';
-      // Tampilkan SnackBar untuk konfirmasi
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Gambar baru dipilih (Simulasi)')),
       );
     });
   }
 
-  // Fungsi untuk menyimpan perubahan profil
   void _saveProfile() {
     final newName = _nameController.text;
 
-    // Log data (dalam aplikasi nyata, ini akan menjadi pemanggilan API)
     print('Nama Baru: $newName');
     print('Path Gambar Baru: ${_pickedImagePath ?? "Tidak ada perubahan"}');
 
-    // Tampilkan notifikasi berhasil
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Profil berhasil diperbarui!')),
     );
 
-    // Kembali ke layar sebelumnya
     Navigator.pop(context);
   }
 
-  // Widget pembangun untuk TextField kustom
   Widget _buildTextField({
     required TextEditingController controller,
     required String label,
@@ -82,7 +72,7 @@ class _EditProfileViewState extends State<EditProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff189B56), // Warna hijau utama
+      backgroundColor: const Color(0xff189B56),
       appBar: AppBar(
         title: const Text(
           'Edit Profile',
@@ -100,7 +90,6 @@ class _EditProfileViewState extends State<EditProfileView> {
             Center(
               child: Column(
                 children: [
-                  // Area Gambar Profil
                   Container(
                     width: 120,
                     height: 120,
@@ -109,7 +98,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                       border: Border.all(color: Colors.white, width: 3),
                       image: DecorationImage(
                         image: NetworkImage(
-                          // Ganti gambar jika sudah dipilih
                           _pickedImagePath != null
                               ? 'https://via.placeholder.com/120?text=New+Image'
                               : 'https://via.placeholder.com/120?text=Profile',
@@ -119,7 +107,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  // Tombol Pilih Gambar
                   ElevatedButton.icon(
                     onPressed: _pickImage,
                     icon: const Icon(
@@ -137,7 +124,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                       ),
                     ),
                   ),
-                  // Tampilkan nama file yang dipilih
                   if (_pickedImagePath != null)
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
@@ -150,20 +136,16 @@ class _EditProfileViewState extends State<EditProfileView> {
               ),
             ),
             const SizedBox(height: 30),
-            // Input Nama
             _buildTextField(
               controller: _nameController,
               label: 'Nama',
               icon: Icons.person,
             ),
             const SizedBox(height: 40),
-            // Tombol Simpan
             ElevatedButton(
               onPressed: _saveProfile,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(
-                  0xffFFA500,
-                ), // Warna oranye untuk tombol
+                backgroundColor: const Color(0xffFFA500),
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
