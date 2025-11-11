@@ -74,8 +74,8 @@ Proyek **Booklist** ini merupakan **proyek pribadi** yang dikerjakan sendiri.
 Intip sekilas antarmuka dan pengalaman pengguna aplikasi **Booklist**. Lihat bagaimana Anda dapat mengelola daftar buku dan memberikan *rating* dengan mudah.
 
 <div align="center">
-  <img src="./assets/gambar1.png" alt="Layar Utama Aplikasi Booklist" width="48%"/>
-  <img src="./assets/gambar2.png" alt="Layar Detail Buku dan Rating" width="48%"/>
+  <img src="./assets/gambar1" alt="Layar Utama Aplikasi Booklist" width="48%"/>
+  <img src="./assets/gambar2" alt="Layar Detail Buku dan Rating" width="48%"/>
 </div>
 
 
